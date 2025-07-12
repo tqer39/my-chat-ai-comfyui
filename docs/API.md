@@ -144,7 +144,7 @@ List available ComfyUI models.
 ```json
 {
   "checkpoints": [
-    "v1-5-pruned-emaonly.ckpt",
+    "sd3.5_medium.safetensors",
     "sd_xl_base_1.0.safetensors"
   ],
   "loras": [

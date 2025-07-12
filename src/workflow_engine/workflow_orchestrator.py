@@ -14,7 +14,7 @@ class WorkflowOrchestrator:
                 "1": {
                     "class_type": "CheckpointLoaderSimple",
                     "inputs": {
-                        "ckpt_name": "v1-5-pruned-emaonly.ckpt"
+                        "ckpt_name": "sd3.5_medium.safetensors"
                     }
                 },
                 "2": {
@@ -35,9 +35,9 @@ class WorkflowOrchestrator:
                     "class_type": "KSampler",
                     "inputs": {
                         "seed": 42,
-                        "steps": 20,
-                        "cfg": 7.0,
-                        "sampler_name": "euler",
+                        "steps": 28,
+                        "cfg": 4.5,
+                        "sampler_name": "dpmpp_2m",
                         "scheduler": "normal",
                         "denoise": 1.0,
                         "model": ["1", 0],
@@ -49,8 +49,8 @@ class WorkflowOrchestrator:
                 "5": {
                     "class_type": "EmptyLatentImage",
                     "inputs": {
-                        "width": 512,
-                        "height": 512,
+                        "width": 1024,
+                        "height": 1024,
                         "batch_size": 1
                     }
                 },
@@ -73,7 +73,7 @@ class WorkflowOrchestrator:
                 "1": {
                     "class_type": "CheckpointLoaderSimple",
                     "inputs": {
-                        "ckpt_name": "v1-5-pruned-emaonly.ckpt"
+                        "ckpt_name": "sd3.5_medium.safetensors"
                     }
                 },
                 "2": {
@@ -94,9 +94,9 @@ class WorkflowOrchestrator:
                     "class_type": "KSampler",
                     "inputs": {
                         "seed": 42,
-                        "steps": 20,
-                        "cfg": 7.0,
-                        "sampler_name": "euler",
+                        "steps": 28,
+                        "cfg": 4.5,
+                        "sampler_name": "dpmpp_2m",
                         "scheduler": "normal",
                         "denoise": 1.0,
                         "model": ["1", 0],
@@ -108,8 +108,8 @@ class WorkflowOrchestrator:
                 "5": {
                     "class_type": "EmptyLatentImage",
                     "inputs": {
-                        "width": 512,
-                        "height": 512,
+                        "width": 1024,
+                        "height": 1024,
                         "batch_size": 1
                     }
                 },
