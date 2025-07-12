@@ -421,7 +421,7 @@ class ChatAIComfyUIClient:
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
-    
+
     def generate_image(self, prompt, user_id="default"):
         data = {
             "message": prompt,
@@ -432,21 +432,21 @@ class ChatAIComfyUIClient:
                 "quality": "high"
             }
         }
-        
+
         response = requests.post(
             f"{self.base_url}/chat/process",
             headers=self.headers,
             json=data
         )
-        
+
         return response.json()
-    
+
     def check_status(self, prompt_id):
         response = requests.get(
             f"{self.base_url}/generation/status/{prompt_id}",
             headers=self.headers
         )
-        
+
         return response.json()
 
 client = ChatAIComfyUIClient("http://localhost:8080/api/v1", "your_api_key")
@@ -462,7 +462,7 @@ class ChatAIComfyUIClient {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
     }
-    
+
     async generateImage(prompt, userId = 'default') {
         const response = await fetch(`${this.baseUrl}/chat/process`, {
             method: 'POST',
@@ -480,17 +480,17 @@ class ChatAIComfyUIClient {
                 }
             })
         });
-        
+
         return await response.json();
     }
-    
+
     async checkStatus(promptId) {
         const response = await fetch(`${this.baseUrl}/generation/status/${promptId}`, {
             headers: {
                 'Authorization': `Bearer ${this.apiKey}`
             }
         });
-        
+
         return await response.json();
     }
 }
@@ -506,7 +506,7 @@ const ws = new WebSocket('ws://localhost:8080/ws');
 
 ws.onopen = function() {
     console.log('Connected to WebSocket');
-    
+
     ws.send(JSON.stringify({
         type: 'chat_message',
         data: {
@@ -518,7 +518,7 @@ ws.onopen = function() {
 
 ws.onmessage = function(event) {
     const message = JSON.parse(event.data);
-    
+
     switch(message.type) {
         case 'chat_response':
             console.log('Chat response:', message.data.response);

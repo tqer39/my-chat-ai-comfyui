@@ -38,39 +38,39 @@ class ChatAIComfyUIApp:
         self.chat_manager = None
         self.intent_processor = None
         self.workflow_orchestrator = None
-        
+
     async def initialize(self):
         logger.info("Initializing Chat AI ComfyUI application...")
-        
+
         comfyui_host = os.getenv("COMFYUI_HOST", "localhost")
         comfyui_port = int(os.getenv("COMFYUI_PORT", "8188"))
-        
+
         self.comfyui_client = ComfyUIClient(host=comfyui_host, port=comfyui_port)
         await self.comfyui_client.connect()
-        
+
         self.intent_processor = IntentProcessor()
         self.workflow_orchestrator = WorkflowOrchestrator(self.comfyui_client)
         self.chat_manager = ChatManager(self.intent_processor, self.workflow_orchestrator)
-        
+
         logger.success("Application initialized successfully")
-        
+
     async def run(self):
         logger.info("Starting Chat AI ComfyUI service...")
-        
+
         try:
             await self.chat_manager.start()
             logger.info("Chat AI service is running. Press Ctrl+C to stop.")
-            
+
             while True:
                 await asyncio.sleep(1)
-                
+
         except KeyboardInterrupt:
             logger.info("Shutting down...")
         except Exception as e:
             logger.error(f"Application error: {e}")
         finally:
             await self.cleanup()
-    
+
     async def cleanup(self):
         if self.comfyui_client:
             await self.comfyui_client.disconnect()
@@ -78,7 +78,7 @@ class ChatAIComfyUIApp:
 
 async def main():
     setup_logging()
-    
+
     app = ChatAIComfyUIApp()
     await app.initialize()
     await app.run()

@@ -11,11 +11,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Test PowerShell syntax
         run: |
           powershell -Command "& { Get-Content setup.ps1 | Out-Null; Write-Host 'PowerShell syntax validation passed' }"
-      
+
       - name: Validate script structure
         run: |
           powershell -Command "& {
@@ -31,7 +31,7 @@ jobs:
               Write-Host 'Script structure validation passed';
             }
           }"
-      
+
       - name: Test script functions
         run: |
           powershell -Command "& {
