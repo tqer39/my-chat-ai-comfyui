@@ -1,5 +1,7 @@
 import pytest
+
 from src.intent_processing import IntentProcessor
+
 
 class TestIntentProcessor:
     @pytest.fixture

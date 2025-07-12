@@ -1,9 +1,8 @@
-import asyncio
-import json
-import websockets
+from typing import Any, Dict, Optional
+
 import aiohttp
-from typing import Dict, Any, Optional
 from loguru import logger
+
 
 class ComfyUIClient:
     def __init__(self, host: str = "localhost", port: int = 8188):
@@ -39,14 +38,10 @@ class ComfyUIClient:
 
     async def queue_prompt(self, workflow: Dict[str, Any]) -> Optional[str]:
         try:
-            prompt_data = {
-                "prompt": workflow,
-                "client_id": "my-chat-ai-comfyui"
-            }
+            prompt_data = {"prompt": workflow, "client_id": "my-chat-ai-comfyui"}
 
             async with self.session.post(
-                f"{self.base_url}/prompt",
-                json=prompt_data
+                f"{self.base_url}/prompt", json=prompt_data
             ) as response:
                 if response.status == 200:
                     result = await response.json()
@@ -74,7 +69,9 @@ class ComfyUIClient:
 
     async def get_history(self, prompt_id: str) -> Dict[str, Any]:
         try:
-            async with self.session.get(f"{self.base_url}/history/{prompt_id}") as response:
+            async with self.session.get(
+                f"{self.base_url}/history/{prompt_id}"
+            ) as response:
                 if response.status == 200:
                     return await response.json()
                 else:

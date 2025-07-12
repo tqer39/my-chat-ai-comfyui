@@ -2,12 +2,14 @@
 
 import asyncio
 import os
+
 from dotenv import load_dotenv
 from loguru import logger
 
 from comfyui_control import ComfyUIClient
 
 load_dotenv()
+
 
 async def main():
     logger.info("Testing ComfyUI connection...")
@@ -31,6 +33,7 @@ async def main():
         logger.error(f"Error: {e}")
     finally:
         await client.disconnect()
+
 
 if __name__ == "__main__":
     asyncio.run(main())

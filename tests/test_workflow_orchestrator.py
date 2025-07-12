@@ -1,17 +1,18 @@
+from unittest.mock import AsyncMock, Mock
+
 import pytest
-from unittest.mock import Mock, AsyncMock
+
 from src.workflow_engine import WorkflowOrchestrator
+
 
 class TestWorkflowOrchestrator:
     @pytest.fixture
     def mock_client(self):
         client = Mock()
         client.queue_prompt = AsyncMock(return_value="test_prompt_id")
-        client.get_history = AsyncMock(return_value={
-            "test_prompt_id": {
-                "outputs": {"images": ["test.png"]}
-            }
-        })
+        client.get_history = AsyncMock(
+            return_value={"test_prompt_id": {"outputs": {"images": ["test.png"]}}}
+        )
         return client
 
     @pytest.fixture
@@ -20,10 +21,7 @@ class TestWorkflowOrchestrator:
 
     @pytest.mark.asyncio
     async def test_execute_generation_basic(self, orchestrator, mock_client):
-        parameters = {
-            "prompt": "a beautiful landscape",
-            "nsfw_filter": False
-        }
+        parameters = {"prompt": "a beautiful landscape", "nsfw_filter": False}
 
         result = await orchestrator.execute_generation(parameters)
 
@@ -33,10 +31,7 @@ class TestWorkflowOrchestrator:
 
     @pytest.mark.asyncio
     async def test_execute_generation_with_nsfw_filter(self, orchestrator, mock_client):
-        parameters = {
-            "prompt": "a portrait",
-            "nsfw_filter": True
-        }
+        parameters = {"prompt": "a portrait", "nsfw_filter": True}
 
         result = await orchestrator.execute_generation(parameters)
 
@@ -46,7 +41,9 @@ class TestWorkflowOrchestrator:
     def test_create_workflow_from_template_basic(self, orchestrator):
         parameters = {"prompt": "test prompt"}
 
-        workflow = orchestrator._create_workflow_from_template("basic_generation", parameters)
+        workflow = orchestrator._create_workflow_from_template(
+            "basic_generation", parameters
+        )
 
         assert "1" in workflow
         assert workflow["2"]["inputs"]["text"] == "test prompt"
@@ -54,7 +51,9 @@ class TestWorkflowOrchestrator:
     def test_create_workflow_from_template_nsfw(self, orchestrator):
         parameters = {"prompt": "test prompt"}
 
-        workflow = orchestrator._create_workflow_from_template("nsfw_filtered_generation", parameters)
+        workflow = orchestrator._create_workflow_from_template(
+            "nsfw_filtered_generation", parameters
+        )
 
         assert "7" in workflow
         assert "8" in workflow

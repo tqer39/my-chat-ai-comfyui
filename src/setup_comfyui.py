@@ -12,6 +12,7 @@ from comfyui_control import ComfyUIClient
 
 load_dotenv()
 
+
 async def test_comfyui_connection():
     logger.info("Testing ComfyUI connection...")
 
@@ -39,15 +40,11 @@ async def test_comfyui_connection():
     finally:
         await client.disconnect()
 
+
 async def setup_directories():
     logger.info("Setting up directories...")
 
-    directories = [
-        "logs",
-        "temp",
-        "outputs",
-        "workflows"
-    ]
+    directories = ["logs", "temp", "outputs", "workflows"]
 
     for directory in directories:
         path = Path(directory)
@@ -57,13 +54,11 @@ async def setup_directories():
         else:
             logger.info(f"Directory already exists: {directory}")
 
+
 def check_environment():
     logger.info("Checking environment configuration...")
 
-    required_vars = [
-        "COMFYUI_HOST",
-        "COMFYUI_PORT"
-    ]
+    required_vars = ["COMFYUI_HOST", "COMFYUI_PORT"]
 
     missing_vars = []
     for var in required_vars:
@@ -77,6 +72,7 @@ def check_environment():
         logger.success("Environment configuration looks good")
 
     return len(missing_vars) == 0
+
 
 async def main():
     logger.info("=== ComfyUI Setup and Configuration ===")
@@ -96,6 +92,7 @@ async def main():
 
     logger.success("=== Setup completed successfully ===")
     logger.info("You can now run the main application with: python src/main.py")
+
 
 if __name__ == "__main__":
     asyncio.run(main())

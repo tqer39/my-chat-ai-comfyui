@@ -1,8 +1,7 @@
-import asyncio
-import logging
-from typing import Dict, Any, Optional
+from typing import Any, Dict
 
 from loguru import logger
+
 
 class ChatManager:
     def __init__(self, intent_processor, workflow_orchestrator):
@@ -13,7 +12,9 @@ class ChatManager:
     async def start(self):
         logger.info("Starting chat manager...")
 
-    async def process_message(self, user_id: str, message: str, platform: str = "default") -> Dict[str, Any]:
+    async def process_message(
+        self, user_id: str, message: str, platform: str = "default"
+    ) -> Dict[str, Any]:
         try:
             logger.info(f"Processing message from {user_id} on {platform}: {message}")
 
@@ -26,13 +27,13 @@ class ChatManager:
                 return {
                     "success": True,
                     "response": "Image generated successfully!",
-                    "data": workflow_result
+                    "data": workflow_result,
                 }
 
             return {
                 "success": True,
                 "response": "I understand your request, but I'm still learning how to handle it.",
-                "data": intent_result
+                "data": intent_result,
             }
 
         except Exception as e:
@@ -40,5 +41,5 @@ class ChatManager:
             return {
                 "success": False,
                 "response": "Sorry, I encountered an error processing your request.",
-                "error": str(e)
+                "error": str(e),
             }

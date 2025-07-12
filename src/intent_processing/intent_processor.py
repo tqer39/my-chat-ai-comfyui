@@ -1,6 +1,8 @@
 import re
-from typing import Dict, Any, List
+from typing import Any, Dict
+
 from loguru import logger
+
 
 class IntentProcessor:
     def __init__(self):
@@ -11,21 +13,21 @@ class IntentProcessor:
                 r"make.*photo",
                 r"draw.*",
                 r"paint.*",
-                r"render.*"
+                r"render.*",
             ],
             "image_modification": [
                 r"modify.*image",
                 r"change.*picture",
                 r"edit.*photo",
                 r"adjust.*",
-                r"alter.*"
+                r"alter.*",
             ],
             "nsfw_filter": [
                 r"safe.*work",
                 r"filter.*nsfw",
                 r"censor.*",
-                r"family.*friendly"
-            ]
+                r"family.*friendly",
+            ],
         }
 
     async def process(self, message: str) -> Dict[str, Any]:
@@ -38,7 +40,7 @@ class IntentProcessor:
             "intent": intent,
             "parameters": parameters,
             "original_message": message,
-            "confidence": 0.8
+            "confidence": 0.8,
         }
 
     def _classify_intent(self, message: str) -> str:
@@ -81,7 +83,7 @@ class IntentProcessor:
             "artistic": ["artistic", "art", "painting"],
             "realistic": ["realistic", "photo", "photograph"],
             "anime": ["anime", "manga", "cartoon"],
-            "abstract": ["abstract", "surreal"]
+            "abstract": ["abstract", "surreal"],
         }
 
         for style, keywords in style_keywords.items():
