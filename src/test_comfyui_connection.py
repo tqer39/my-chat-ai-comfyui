@@ -11,7 +11,7 @@ from comfyui_control import ComfyUIClient
 load_dotenv()
 
 
-async def main():
+async def main() -> None:
     logger.info("Testing ComfyUI connection...")
 
     host = os.getenv("COMFYUI_HOST", "localhost")

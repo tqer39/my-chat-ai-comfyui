@@ -5,15 +5,15 @@ from loguru import logger
 
 
 class ComfyUIClient:
-    def __init__(self, host: str = "localhost", port: int = 8188):
+    def __init__(self, host: str = "localhost", port: int = 8188) -> None:
         self.host = host
         self.port = port
         self.base_url = f"http://{host}:{port}"
         self.ws_url = f"ws://{host}:{port}/ws"
-        self.session = None
+        self.session: Optional[aiohttp.ClientSession] = None
         self.websocket = None
 
-    async def connect(self):
+    async def connect(self) -> bool:
         try:
             self.session = aiohttp.ClientSession()
             logger.info(f"Connecting to ComfyUI at {self.base_url}")
@@ -30,13 +30,17 @@ class ComfyUIClient:
             logger.error(f"Error connecting to ComfyUI: {e}")
             return False
 
-    async def disconnect(self):
+    async def disconnect(self) -> None:
         if self.websocket:
             await self.websocket.close()
         if self.session:
             await self.session.close()
 
     async def queue_prompt(self, workflow: Dict[str, Any]) -> Optional[str]:
+        if not self.session:
+            logger.error("Client not connected")
+            return None
+
         try:
             prompt_data = {"prompt": workflow, "client_id": "my-chat-ai-comfyui"}
 
@@ -47,7 +51,7 @@ class ComfyUIClient:
                     result = await response.json()
                     prompt_id = result.get("prompt_id")
                     logger.info(f"Queued prompt with ID: {prompt_id}")
-                    return prompt_id
+                    return str(prompt_id) if prompt_id else None
                 else:
                     logger.error(f"Failed to queue prompt: {response.status}")
                     return None
@@ -57,10 +61,14 @@ class ComfyUIClient:
             return None
 
     async def get_queue_status(self) -> Dict[str, Any]:
+        if not self.session:
+            return {"error": "Client not connected"}
+
         try:
             async with self.session.get(f"{self.base_url}/queue") as response:
                 if response.status == 200:
-                    return await response.json()
+                    result = await response.json()
+                    return dict(result) if result else {}
                 else:
                     return {"error": f"HTTP {response.status}"}
         except Exception as e:
@@ -68,12 +76,16 @@ class ComfyUIClient:
             return {"error": str(e)}
 
     async def get_history(self, prompt_id: str) -> Dict[str, Any]:
+        if not self.session:
+            return {"error": "Client not connected"}
+
         try:
             async with self.session.get(
                 f"{self.base_url}/history/{prompt_id}"
             ) as response:
                 if response.status == 200:
-                    return await response.json()
+                    result = await response.json()
+                    return dict(result) if result else {}
                 else:
                     return {"error": f"HTTP {response.status}"}
         except Exception as e:

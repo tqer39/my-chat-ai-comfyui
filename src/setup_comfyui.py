@@ -13,7 +13,7 @@ from comfyui_control import ComfyUIClient
 load_dotenv()
 
 
-async def test_comfyui_connection():
+async def test_comfyui_connection() -> bool:
     logger.info("Testing ComfyUI connection...")
 
     host = os.getenv("COMFYUI_HOST", "localhost")
@@ -41,7 +41,7 @@ async def test_comfyui_connection():
         await client.disconnect()
 
 
-async def setup_directories():
+async def setup_directories() -> None:
     logger.info("Setting up directories...")
 
     directories = ["logs", "temp", "outputs", "workflows"]
@@ -55,7 +55,7 @@ async def setup_directories():
             logger.info(f"Directory already exists: {directory}")
 
 
-def check_environment():
+def check_environment() -> bool:
     logger.info("Checking environment configuration...")
 
     required_vars = ["COMFYUI_HOST", "COMFYUI_PORT"]
@@ -74,7 +74,7 @@ def check_environment():
     return len(missing_vars) == 0
 
 
-async def main():
+async def main() -> None:
     logger.info("=== ComfyUI Setup and Configuration ===")
 
     env_ok = check_environment()
