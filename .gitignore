@@ -1,3 +1,61 @@
+# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,vim,visualstudiocode,python,powershell
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,vim,visualstudiocode,python,powershell
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+### PowerShell ###
+# Exclude packaged modules
+*.zip
+
+# Exclude .NET assemblies from source
+*.dll
+
+### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -154,58 +212,179 @@ cython_debug/
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be added to the global gitignore or merged into this project gitignore.  For a PyCharm
-#  project, it is recommended to include the following files in version control:
-#  - .idea/modules.xml
-#  - .idea/*.iml
-#  - .idea/misc.xml
-#  - .idea/vcs.xml
-.idea/
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
 
-# VS Code
-.vscode/
-*.code-workspace
+### Python Patch ###
+# Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
+poetry.toml
 
-# ComfyUI specific
+# ruff
+.ruff_cache/
+
+# LSP config files
+pyrightconfig.json
+
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+
+# Auto-generated tag files
+tags
+
+# Persistent undo
+[._]*.un~
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,vim,visualstudiocode,python,powershell
+
+# =============================================================================
+# Project-specific ignore patterns (my-chat-ai-comfyui)
+# =============================================================================
+
+# ComfyUI specific directories and files
 models/
+checkpoints/
+loras/
+controlnet/
+vae/
+embeddings/
+hypernetworks/
+upscale_models/
+clip_vision/
+style_models/
+diffusers/
+gligen/
+unet/
+clip/
+configs/
+custom_nodes/*/models/
+custom_nodes/*/checkpoints/
+
+# ComfyUI outputs and temporary files
 output/
 outputs/
 temp/
 tmp/
 input/
 inputs/
-custom_nodes/*/models/
-*.ckpt
-*.safetensors
-*.pt
-*.pth
-*.bin
+user/
+web/extensions/
+web/user/
 
-# NSFW Detection models
-Nudenet/
+# ComfyUI logs and cache
+comfyui.log
+cache/
+
+# NSFW Detection Models
 nudenet_models/
+nsfw_models/
+Nudenet/
 
-# Generated images and videos
+# Chat AI and API keys
+.env.local
+.env.production
+.env.staging
+.env.development
+*.key
+*.pem
+api_keys.txt
+secrets.json
+config.json
+private_config.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+chat_history.db
+user_sessions.db
+
+# Generated images and media
 *.png
 *.jpg
 *.jpeg
 *.gif
+*.webp
 *.mp4
 *.avi
 *.mov
-*.webm
+!docs/images/*.png
+!docs/images/*.jpg
+!examples/*.png
+!examples/*.jpg
 
-# Logs
-logs/
-*.log
-*.log.*
+# Workflow files (user-generated)
+user_workflows/
+custom_workflows/
+saved_workflows/
 
-# Configuration files with secrets
-.env.local
-.env.production
-config/local.json
-config/production.json
-secrets.json
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archive files
+*.rar
+*.7z
 
 # Chat AI specific
 chat_history/
@@ -217,82 +396,10 @@ api_keys.txt
 tokens.json
 credentials.json
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-
-# Cache directories
-.cache/
-cache/
-__pycache__/
-
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*.swo
-*~
-
-# OS specific
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
-
-# Windows specific
-*.lnk
-
-# Node.js (if using JavaScript components)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.npm
-.yarn-integrity
-
-# Docker
-.dockerignore
-docker-compose.override.yml
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Archive files
-*.zip
-*.tar.gz
-*.rar
-*.7z
-
 # Large model files (use Git LFS if needed)
 *.onnx
 *.trt
 *.engine
-
-# Jupyter notebook checkpoints
-.ipynb_checkpoints/
-
-# pytest
-.pytest_cache/
-
-# Coverage reports
-htmlcov/
-.coverage
-
-# Profiling data
-*.prof
-
-# Memory dumps
-*.dmp
-
-# Core dumps
-core.*
 
 # Application specific
 workflow_cache/
