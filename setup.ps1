@@ -240,7 +240,7 @@ function Install-ChatAIIntegration {
     }
 
     # Copy example configuration
-    if (Test-Path "config\example.env" -and -not (Test-Path ".env")) {
+    if ((Test-Path "config\example.env") -and (-not (Test-Path ".env"))) {
         Copy-Item "config\example.env" ".env"
         Write-Success "✓ Created .env configuration file"
         Write-Warning "⚠ Please edit .env file with your API keys and configuration"
