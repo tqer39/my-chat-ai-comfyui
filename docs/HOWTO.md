@@ -116,8 +116,8 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 1. **Base Stable Diffusion Models**:
    ```bash
    # Download to ComfyUI/models/checkpoints/
-   # Example: Stable Diffusion 1.5
-   wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
+   # Example: Stable Diffusion 3.5 Medium (requires license acceptance)
+   # Visit https://huggingface.co/stabilityai/stable-diffusion-3.5-medium
    ```
 
 2. **NSFW Detection Model**:
@@ -203,7 +203,7 @@ ComfyUI/
      "1": {
        "class_type": "CheckpointLoaderSimple",
        "inputs": {
-         "ckpt_name": "v1-5-pruned-emaonly.ckpt"
+         "ckpt_name": "sd3.5_medium.safetensors"
        }
      },
      "2": {

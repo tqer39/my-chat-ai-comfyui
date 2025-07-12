@@ -270,19 +270,19 @@ function Download-Models {
         }
     }
 
-    # Download Stable Diffusion 1.5 (if not exists)
-    $sd15Path = "$checkpointsPath\v1-5-pruned-emaonly.ckpt"
-    if (-not (Test-Path $sd15Path)) {
-        Write-Info "Downloading Stable Diffusion 1.5 model (this may take a while)..."
-        try {
-            $sd15Url = "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-            Invoke-WebRequest -Uri $sd15Url -OutFile $sd15Path -TimeoutSec 3600
-            Write-Success "✓ Stable Diffusion 1.5 model downloaded"
-        } catch {
-            Write-Warning "⚠ Failed to download SD 1.5 model. You can download it manually later."
-        }
+    # Download Stable Diffusion 3.5 Medium (manual download required)
+    $sd35Path = "$checkpointsPath\sd3.5_medium.safetensors"
+    if (-not (Test-Path $sd35Path)) {
+        Write-Warning "⚠ Stable Diffusion 3.5 Medium requires manual download due to license requirements."
+        Write-Info "Please follow these steps:"
+        Write-Info "1. Visit: https://huggingface.co/stabilityai/stable-diffusion-3.5-medium"
+        Write-Info "2. Accept the license terms"
+        Write-Info "3. Download sd3.5_medium.safetensors"
+        Write-Info "4. Place the file in: $sd35Path"
+        Write-Info ""
+        Write-Info "The system will work with any compatible SD3.5 Medium model file."
     } else {
-        Write-Success "✓ Stable Diffusion 1.5 model already exists"
+        Write-Success "✓ Stable Diffusion 3.5 Medium model found"
     }
 
     Write-Info "Note: NSFW detection model will be downloaded automatically on first use"
