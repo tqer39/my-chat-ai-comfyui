@@ -342,7 +342,7 @@ Configure which content types to filter:
 # In your configuration
 NSFW_LABELS = [
     "EXPOSED_ANUS",
-    "EXPOSED_ARMPITS", 
+    "EXPOSED_ARMPITS",
     "EXPOSED_BELLY",
     "EXPOSED_BUTTOCKS",
     "EXPOSED_BREAST_F",

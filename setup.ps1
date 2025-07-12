@@ -119,7 +119,7 @@ function Install-Python {
         Write-Info "Installing Scoop..."
         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
         Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-        
+
         # Refresh PATH to include scoop
         $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
     }
@@ -131,7 +131,7 @@ function Install-Python {
     } catch {
         Write-Info "Installing uv via scoop..."
         scoop install main/uv
-        
+
         # Refresh PATH to include uv
         $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
     }
@@ -175,7 +175,7 @@ function Install-ComfyUI {
     # Install Python dependencies
     Write-Info "Installing ComfyUI dependencies..."
     uv pip install --upgrade pip
-    
+
     # Install PyTorch with CUDA support
     Write-Info "Installing PyTorch with CUDA support..."
     uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121

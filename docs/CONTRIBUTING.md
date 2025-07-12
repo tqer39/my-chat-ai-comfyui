@@ -171,38 +171,38 @@ from loguru import logger
 
 class IntentProcessor:
     """Processes natural language intents for ComfyUI operations.
-    
+
     This class handles the analysis of user messages to extract
     actionable intents and parameters for image generation.
-    
+
     Attributes:
         intent_patterns: Dictionary mapping intent types to regex patterns.
     """
-    
+
     def __init__(self) -> None:
         """Initialize the intent processor with default patterns."""
         self.intent_patterns = self._load_default_patterns()
-    
+
     async def process(self, message: str) -> Dict[str, Any]:
         """Process a natural language message to extract intent.
-        
+
         Args:
             message: The user's natural language input.
-            
+
         Returns:
             Dictionary containing intent classification and parameters.
-            
+
         Raises:
             ValueError: If the message is empty or invalid.
         """
         if not message.strip():
             raise ValueError("Message cannot be empty")
-        
+
         logger.info(f"Processing message: {message}")
-        
+
         intent = self._classify_intent(message)
         parameters = self._extract_parameters(message, intent)
-        
+
         return {
             "intent": intent,
             "parameters": parameters,
@@ -270,24 +270,24 @@ class TestIntentProcessor:
     @pytest.fixture
     def processor(self):
         return IntentProcessor()
-    
+
     @pytest.mark.asyncio
     async def test_process_image_generation_intent(self, processor):
         """Test that image generation intents are correctly classified."""
         message = "Generate a red sports car"
-        
+
         result = await processor.process(message)
-        
+
         assert result["intent"] == "image_generation"
         assert "red sports car" in result["parameters"]["prompt"]
         assert result["confidence"] > 0.5
-    
+
     def test_extract_style_from_message(self, processor):
         """Test style extraction from natural language."""
         message = "create an artistic painting of a landscape"
-        
+
         style = processor._extract_style(message)
-        
+
         assert style == "artistic"
 ```
 
@@ -305,13 +305,13 @@ class TestComfyUIIntegration:
         """Test complete workflow from chat to image generation."""
         app = ChatAIComfyUIApp()
         await app.initialize()
-        
+
         result = await app.chat_manager.process_message(
             user_id="test_user",
             message="Generate a simple landscape",
             platform="test"
         )
-        
+
         assert result["success"] is True
         assert "prompt_id" in result["data"]
 ```
@@ -348,15 +348,15 @@ pytest --cov=src --cov-report=html tests/
 
 ```python
 def create_workflow_from_template(
-    self, 
-    template_name: str, 
+    self,
+    template_name: str,
     parameters: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Create a ComfyUI workflow from a template.
-    
+
     Takes a workflow template and fills in the parameters to create
     a complete workflow ready for execution.
-    
+
     Args:
         template_name: Name of the workflow template to use.
         parameters: Dictionary of parameters to fill into the template.
@@ -364,14 +364,14 @@ def create_workflow_from_template(
             - prompt (str): The text prompt for generation
             - style (str, optional): Style modifier for the prompt
             - nsfw_filter (bool, optional): Whether to apply NSFW filtering
-    
+
     Returns:
         Complete workflow dictionary ready for ComfyUI execution.
-        
+
     Raises:
         KeyError: If the template_name is not found.
         ValueError: If required parameters are missing.
-        
+
     Example:
         >>> orchestrator = WorkflowOrchestrator(client)
         >>> workflow = orchestrator.create_workflow_from_template(
