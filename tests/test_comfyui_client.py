@@ -7,11 +7,11 @@ from src.comfyui_control import ComfyUIClient
 
 class TestComfyUIClient:
     @pytest.fixture
-    def client(self):
+    def client(self) -> ComfyUIClient:
         return ComfyUIClient(host="localhost", port=8188)
 
     @pytest.mark.asyncio
-    async def test_connect_success(self, client):
+    async def test_connect_success(self, client: ComfyUIClient) -> None:
         with patch("aiohttp.ClientSession") as mock_session_class:
             mock_session = Mock()
             mock_response = Mock()
@@ -25,7 +25,7 @@ class TestComfyUIClient:
             assert client.session is not None
 
     @pytest.mark.asyncio
-    async def test_connect_failure(self, client):
+    async def test_connect_failure(self, client: ComfyUIClient) -> None:
         with patch("aiohttp.ClientSession") as mock_session_class:
             mock_session = Mock()
             mock_response = Mock()
@@ -38,7 +38,7 @@ class TestComfyUIClient:
             assert result is False
 
     @pytest.mark.asyncio
-    async def test_queue_prompt_success(self, client):
+    async def test_queue_prompt_success(self, client: ComfyUIClient) -> None:
         workflow = {"test": "workflow"}
 
         with patch("aiohttp.ClientSession") as mock_session_class:
@@ -55,7 +55,7 @@ class TestComfyUIClient:
             assert result == "test_id"
 
     @pytest.mark.asyncio
-    async def test_get_queue_status(self, client):
+    async def test_get_queue_status(self, client: ComfyUIClient) -> None:
         with patch("aiohttp.ClientSession") as mock_session_class:
             mock_session = Mock()
             mock_response = Mock()

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial project structure and documentation
 - Core chat AI to ComfyUI integration framework
 - NSFW content filtering with ComfyUI-Nudenet integration
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuration management with environment variables
 
 ### Documentation
+
 - README.md with comprehensive project overview
 - HOWTO.md with detailed setup and usage instructions
 - API.md with complete API documentation
@@ -31,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Code of conduct and contribution standards
 
 ### Infrastructure
+
 - Python package configuration with pyproject.toml
 - Pre-commit hooks for code quality
 - GitHub Actions CI/CD pipeline (planned)
@@ -39,7 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2025-01-12
 
-### Added
+### Initial Release
+
 - Initial release with core functionality
 - Basic chat AI to ComfyUI integration
 - NSFW filtering capabilities

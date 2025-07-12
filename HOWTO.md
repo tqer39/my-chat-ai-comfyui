@@ -1,6 +1,7 @@
 # ComfyUI NSFW Setup Guide
 
-This comprehensive guide will walk you through setting up ComfyUI with NSFW content filtering capabilities and integrating it with the my-chat-ai-comfyui system.
+This comprehensive guide will walk you through setting up ComfyUI with NSFW content filtering capabilities and
+integrating it with the my-chat-ai-comfyui system.
 
 ## Table of Contents
 
@@ -35,12 +36,14 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 ### Method 1: Automated Installation (Windows 11)
 
 1. **Download ComfyUI Portable**:
+
    ```powershell
    # Download the latest ComfyUI portable version
    Invoke-WebRequest -Uri "https://github.com/comfyanonymous/ComfyUI/releases/latest/download/ComfyUI_windows_portable_nvidia_cu121_or_cpu.7z" -OutFile "ComfyUI_portable.7z"
    ```
 
 2. **Extract and Setup**:
+
    ```powershell
    # Extract to your preferred directory
    7z x ComfyUI_portable.7z -o"C:\ComfyUI"
@@ -48,6 +51,7 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
    ```
 
 3. **Run ComfyUI**:
+
    ```powershell
    .\run_nvidia_gpu.bat
    ```
@@ -55,18 +59,21 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 ### Method 2: Manual Installation
 
 1. **Clone ComfyUI Repository**:
+
    ```bash
    git clone https://github.com/comfyanonymous/ComfyUI.git
    cd ComfyUI
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
    pip install -r requirements.txt
    ```
 
 3. **Launch ComfyUI**:
+
    ```bash
    python main.py
    ```
@@ -76,7 +83,7 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 ### Installation via ComfyUI Manager
 
 1. **Access ComfyUI Manager**:
-   - Open ComfyUI in your browser (usually http://localhost:8188)
+   - Open ComfyUI in your browser (usually <http://localhost:8188>)
    - Click the "Manager" button in the main menu
 
 2. **Install ComfyUI-Nudenet**:
@@ -92,18 +99,21 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 ### Manual Installation
 
 1. **Clone the Extension**:
+
    ```bash
    cd ComfyUI/custom_nodes
    git clone https://github.com/phuvinh010701/ComfyUI-Nudenet.git
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    cd ComfyUI-Nudenet
    pip install -r requirements.txt
    ```
 
 3. **Restart ComfyUI**:
+
    ```bash
    # Stop ComfyUI and restart
    python main.py
@@ -114,6 +124,7 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 ### Download Required Models
 
 1. **Base Stable Diffusion Models**:
+
    ```bash
    # Download to ComfyUI/models/checkpoints/
    # Example: Stable Diffusion 3.5 Medium (requires license acceptance)
@@ -121,6 +132,7 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
    ```
 
 2. **NSFW Detection Model**:
+
    ```bash
    # The Nudenet model will be automatically downloaded on first use
    # It will be placed in ComfyUI/models/Nudenet/
@@ -128,7 +140,7 @@ This comprehensive guide will walk you through setting up ComfyUI with NSFW cont
 
 ### Model Directory Structure
 
-```
+```text
 ComfyUI/
 ├── models/
 │   ├── checkpoints/          # Stable Diffusion models
@@ -146,11 +158,13 @@ ComfyUI/
 ### Environment Setup
 
 1. **Create Configuration File**:
+
    ```bash
    cp config/example.env .env
    ```
 
 2. **Configure Environment Variables**:
+
    ```env
    # ComfyUI Configuration
    COMFYUI_HOST=localhost
@@ -171,16 +185,19 @@ ComfyUI/
 ### API Integration
 
 1. **Install Python Dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Test ComfyUI API Connection**:
+
    ```python
    python src/test_comfyui_connection.py
    ```
 
 3. **Start Chat AI Service**:
+
    ```bash
    python src/main.py
    ```
@@ -198,6 +215,7 @@ ComfyUI/
    - Configure filtering parameters
 
 2. **Example Workflow JSON**:
+
    ```json
    {
      "1": {
@@ -232,7 +250,8 @@ ComfyUI/
 ### Chat Command Processing
 
 1. **Natural Language Input**:
-   ```
+
+   ```text
    User: "Generate a portrait of a person in artistic style, make sure it's safe for work"
    ```
 
@@ -252,17 +271,21 @@ ComfyUI/
 **Problem**: ComfyUI fails to launch or crashes on startup.
 
 **Solutions**:
+
 1. Check Python version compatibility:
+
    ```bash
    python --version  # Should be 3.8+
    ```
 
 2. Verify GPU drivers:
+
    ```bash
    nvidia-smi  # Check NVIDIA GPU status
    ```
 
 3. Install missing dependencies:
+
    ```bash
    pip install --upgrade torch torchvision torchaudio
    ```
@@ -272,17 +295,21 @@ ComfyUI/
 **Problem**: NSFW filtering nodes don't appear or don't work.
 
 **Solutions**:
+
 1. Verify installation:
+
    ```bash
    ls ComfyUI/custom_nodes/ComfyUI-Nudenet/
    ```
 
 2. Check dependencies:
+
    ```bash
    pip install onnxruntime opencv-python pillow
    ```
 
 3. Restart ComfyUI completely:
+
    ```bash
    # Kill all ComfyUI processes and restart
    ```
@@ -292,17 +319,21 @@ ComfyUI/
 **Problem**: Models fail to load or cause out-of-memory errors.
 
 **Solutions**:
+
 1. Check available VRAM:
+
    ```bash
    nvidia-smi
    ```
 
 2. Use smaller models or enable CPU offloading:
+
    ```bash
    python main.py --cpu
    ```
 
 3. Verify model file integrity:
+
    ```bash
    # Re-download corrupted models
    ```
@@ -312,11 +343,13 @@ ComfyUI/
 #### GPU Memory Management
 
 1. **Enable Model Offloading**:
+
    ```bash
    python main.py --normalvram
    ```
 
 2. **Use Attention Optimization**:
+
    ```bash
    python main.py --use-split-cross-attention
    ```
@@ -364,7 +397,7 @@ Create reusable workflow templates for common use cases:
 
 The system provides REST API endpoints for integration:
 
-```
+```text
 POST /api/generate
 POST /api/filter
 GET /api/status

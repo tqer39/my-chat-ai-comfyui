@@ -5,7 +5,7 @@ from loguru import logger
 
 
 class IntentProcessor:
-    def __init__(self):
+    def __init__(self) -> None:
         self.intent_patterns = {
             "image_generation": [
                 r"generate.*image",
@@ -59,7 +59,7 @@ class IntentProcessor:
         if intent == "image_generation":
             parameters["prompt"] = self._extract_prompt(message)
             parameters["style"] = self._extract_style(message)
-            parameters["nsfw_filter"] = self._should_apply_nsfw_filter(message)
+            parameters["nsfw_filter"] = str(self._should_apply_nsfw_filter(message))
 
         elif intent == "image_modification":
             parameters["modification_type"] = self._extract_modification_type(message)

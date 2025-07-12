@@ -6,7 +6,7 @@ from loguru import logger
 
 
 class WorkflowOrchestrator:
-    def __init__(self, comfyui_client):
+    def __init__(self, comfyui_client: Any) -> None:
         self.comfyui_client = comfyui_client
         self.workflow_templates = self._load_workflow_templates()
 
@@ -158,7 +158,7 @@ class WorkflowOrchestrator:
                     "{prompt}", prompt
                 )
 
-        return workflow
+        return dict(workflow)
 
     async def _wait_for_completion(
         self, prompt_id: str, timeout: int = 300
