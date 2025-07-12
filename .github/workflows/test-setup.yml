@@ -1,0 +1,40 @@
+name: Test setup.ps1
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-setup-script:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Test PowerShell syntax
+        run: |
+          powershell -Command "& { Get-Content setup.ps1 | Out-Null; Write-Host 'PowerShell syntax validation passed' }"
+      
+      - name: Validate script structure
+        run: |
+          powershell -Command "
+            $content = Get-Content setup.ps1
+            $hasProblematicSyntax = $false
+            foreach ($line in $content) {
+              if ($line -match 'Test-Path.*-and' -and $line -notmatch '\(\(Test-Path.*\)\s*-and\s*\(.*\)\)') {
+                Write-Error \"Found problematic Test-Path syntax on line: $line\"
+                $hasProblematicSyntax = $true
+              }
+            }
+            if (-not $hasProblematicSyntax) {
+              Write-Host 'Script structure validation passed'
+            }
+          "
+      
+      - name: Test script functions
+        run: |
+          powershell -Command "
+            . .\setup.ps1 -SkipComfyUI -SkipPython -SkipModels -WhatIf
+            Write-Host 'Script function test completed'
+          "

@@ -107,43 +107,48 @@ function Test-SystemRequirements {
     }
 }
 
-# Install Python
+# Install Python via scoop and uv
 function Install-Python {
-    Write-Info "Installing Python $PythonVersion..."
+    Write-Info "Installing Python via scoop and uv..."
 
-    # Check if Python is already installed
+    # Check if scoop is installed
     try {
-        $pythonVersion = python --version 2>&1
-        if ($pythonVersion -match "Python 3\.[8-9]|Python 3\.1[0-9]") {
-            Write-Success "✓ Python is already installed: $pythonVersion"
-            return
-        }
+        scoop --version | Out-Null
+        Write-Success "✓ Scoop is already installed"
     } catch {
-        Write-Info "Python not found, proceeding with installation..."
+        Write-Info "Installing Scoop..."
+        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+        Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+        
+        # Refresh PATH to include scoop
+        $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
     }
 
-    # Download and install Python
-    $pythonUrl = "https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe"
-    $pythonInstaller = "$env:TEMP\python-installer.exe"
+    # Install uv via scoop
+    try {
+        uv --version | Out-Null
+        Write-Success "✓ uv is already installed"
+    } catch {
+        Write-Info "Installing uv via scoop..."
+        scoop install main/uv
+        
+        # Refresh PATH to include uv
+        $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+    }
 
-    Write-Info "Downloading Python installer..."
-    Invoke-WebRequest -Uri $pythonUrl -OutFile $pythonInstaller
-
-    Write-Info "Installing Python (this may take a few minutes)..."
-    Start-Process -FilePath $pythonInstaller -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=1", "Include_test=0" -Wait
+    # Install Python via uv
+    Write-Info "Installing Python $PythonVersion via uv..."
+    uv python install $PythonVersion
+    uv python pin $PythonVersion
 
     # Verify installation
-    $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "User")
     try {
-        $pythonVersion = python --version
-        Write-Success "✓ Python installed successfully: $pythonVersion"
+        $pythonVersion = uv run python --version
+        Write-Success "✓ Python installed successfully via uv: $pythonVersion"
     } catch {
-        Write-Error "Python installation failed. Please install manually."
+        Write-Error "Python installation via uv failed. Please check the installation."
         exit 1
     }
-
-    # Clean up
-    Remove-Item $pythonInstaller -ErrorAction SilentlyContinue
 }
 
 # Install ComfyUI
@@ -169,15 +174,15 @@ function Install-ComfyUI {
 
     # Install Python dependencies
     Write-Info "Installing ComfyUI dependencies..."
-    python -m pip install --upgrade pip
+    uv pip install --upgrade pip
     
     # Install PyTorch with CUDA support
     Write-Info "Installing PyTorch with CUDA support..."
-    python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+    uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
     # Install other requirements
     if (Test-Path "requirements.txt") {
-        python -m pip install -r requirements.txt
+        uv pip install -r requirements.txt
     }
 
     Write-Success "✓ ComfyUI installed successfully"
@@ -208,11 +213,11 @@ function Install-ComfyUINudenet {
     # Install extension dependencies
     Set-Location $nudenetPath
     if (Test-Path "requirements.txt") {
-        python -m pip install -r requirements.txt
+        uv pip install -r requirements.txt
     }
 
     # Install additional dependencies
-    python -m pip install onnxruntime opencv-python pillow
+    uv pip install onnxruntime opencv-python pillow
 
     Write-Success "✓ ComfyUI-Nudenet extension installed successfully"
 }
@@ -227,7 +232,7 @@ function Install-ChatAIIntegration {
     # Install project dependencies
     if (Test-Path "requirements.txt") {
         Write-Info "Installing project dependencies..."
-        python -m pip install -r requirements.txt
+        uv pip install -r requirements.txt
     }
 
     # Create necessary directories
