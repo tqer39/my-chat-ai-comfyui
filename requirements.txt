@@ -1,0 +1,149 @@
+# Core dependencies for my-chat-ai-comfyui
+
+# ComfyUI API integration
+requests>=2.31.0
+websocket-client>=1.6.0
+aiohttp>=3.8.0
+asyncio-mqtt>=0.13.0
+
+# Image processing
+Pillow>=10.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# AI and ML libraries
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+diffusers>=0.20.0
+
+# NSFW detection (ComfyUI-Nudenet dependencies)
+onnxruntime>=1.15.0
+onnx>=1.14.0
+
+# Chat AI integration
+openai>=1.0.0
+discord.py>=2.3.0
+slack-sdk>=3.21.0
+python-telegram-bot>=20.0
+
+# Natural language processing
+spacy>=3.6.0
+nltk>=3.8.0
+textblob>=0.17.0
+
+# Web framework (for API endpoints)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Configuration and environment
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+toml>=0.10.0
+
+# Database (for conversation history)
+sqlalchemy>=2.0.0
+sqlite3  # Built-in with Python
+
+# Logging and monitoring
+loguru>=0.7.0
+prometheus-client>=0.17.0
+
+# Utilities
+click>=8.1.0
+rich>=13.0.0
+tqdm>=4.65.0
+schedule>=1.2.0
+
+# Development dependencies
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Security
+cryptography>=41.0.0
+bcrypt>=4.0.0
+
+# HTTP client
+httpx>=0.24.0
+
+# JSON handling
+orjson>=3.9.0
+
+# Date and time utilities
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# File handling
+pathlib2>=2.3.0  # For Python < 3.4 compatibility
+
+# Async utilities
+asyncio>=3.4.3
+aiofiles>=23.0.0
+
+# Queue management
+celery>=5.3.0
+redis>=4.6.0
+
+# Image format support
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.0
+
+# Model downloading and caching
+huggingface-hub>=0.16.0
+gdown>=4.7.0
+
+# API rate limiting
+slowapi>=0.1.9
+
+# Configuration validation
+cerberus>=1.3.0
+
+# Progress bars and UI
+streamlit>=1.25.0  # Optional web UI
+gradio>=3.40.0     # Alternative web UI
+
+# Memory profiling (development)
+memory-profiler>=0.61.0
+psutil>=5.9.0
+
+# Testing utilities
+responses>=0.23.0
+pytest-mock>=3.11.0
+
+# Documentation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0
+
+# Code quality
+pre-commit>=3.3.0
+isort>=5.12.0
+
+# Environment detection
+platform>=1.0.8
+
+# Workflow serialization
+jsonschema>=4.19.0
+
+# Performance monitoring
+py-spy>=0.3.14
+
+# Optional: GPU monitoring
+nvidia-ml-py>=12.535.0  # For NVIDIA GPU monitoring
+
+# Optional: Advanced image processing
+scikit-image>=0.21.0
+matplotlib>=3.7.0
+
+# Optional: Audio processing (for future features)
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# Optional: Video processing
+moviepy>=1.0.3
+
+# Optional: Advanced NLP
+sentence-transformers>=2.2.0
