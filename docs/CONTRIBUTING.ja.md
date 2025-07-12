@@ -199,21 +199,21 @@ def process_chat_message(
     options: Optional[Dict[str, Any]] = None
 ) -> ChatResponse:
     """チャットメッセージを処理し、ComfyUIワークフローを生成する。
-    
+
     Args:
         message: ユーザーからのメッセージ
         user_id: ユーザーID
         options: オプション設定
-        
+
     Returns:
         処理結果を含むChatResponse
-        
+
     Raises:
         InvalidMessageError: メッセージが無効な場合
     """
     if not message.strip():
         raise InvalidMessageError("メッセージが空です")
-    
+
     # 処理ロジック
     return ChatResponse(success=True, data=result)
 ```
@@ -246,7 +246,7 @@ from src.comfyui_control import ComfyUIClient
 
 ### テスト構造
 
-```
+```text
 tests/
 ├── unit/                   # 単体テスト
 │   ├── test_chat_manager.py
@@ -274,32 +274,32 @@ class TestChatManager:
     @pytest.fixture
     def chat_manager(self):
         return ChatManager(api_key="test_key")
-    
+
     @pytest.fixture
     def mock_comfyui_client(self):
         client = Mock()
         client.queue_prompt.return_value = "prompt_123"
         return client
-    
+
     def test_process_message_success(self, chat_manager, mock_comfyui_client):
         # Arrange
         message = "美しい風景を生成してください"
         chat_manager.comfyui_client = mock_comfyui_client
-        
+
         # Act
         result = chat_manager.process_message(message, "user_123")
-        
+
         # Assert
         assert result.success is True
         assert result.prompt_id == "prompt_123"
         mock_comfyui_client.queue_prompt.assert_called_once()
-    
+
     @pytest.mark.asyncio
     async def test_async_processing(self, chat_manager):
         # 非同期テストの例
         result = await chat_manager.process_async("test message")
         assert result is not None
-    
+
     @pytest.mark.integration
     def test_full_pipeline(self):
         # 統合テスト（実際のComfyUIが必要）
@@ -329,7 +329,7 @@ pytest --cov=src --cov-report=html
 
 ### ドキュメント構造
 
-```
+```text
 docs/
 ├── README.ja.md           # プロジェクト概要（日本語）
 ├── HOWTO.ja.md           # セットアップガイド（日本語）

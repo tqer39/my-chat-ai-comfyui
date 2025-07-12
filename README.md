@@ -1,6 +1,8 @@
 # My Chat AI ComfyUI
 
-A powerful integration system that bridges conversational AI interfaces with ComfyUI's visual programming environment for Stable Diffusion workflows. This project enables users to control complex image generation pipelines through natural language commands, democratizing access to advanced AI image generation capabilities.
+A powerful integration system that bridges conversational AI interfaces with ComfyUI's visual programming environment for
+Stable Diffusion workflows. This project enables users to control complex image generation pipelines through natural
+language commands, democratizing access to advanced AI image generation capabilities.
 
 ## 🚀 Features
 
@@ -31,12 +33,14 @@ A powerful integration system that bridges conversational AI interfaces with Com
 ### Automated Setup (Windows 11)
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/tqer39/my-chat-ai-comfyui.git
 cd my-chat-ai-comfyui
 ```
 
-2. Run the automated setup script:
+1. Run the automated setup script:
+
 ```powershell
 .\setup.ps1
 ```
@@ -44,16 +48,19 @@ cd my-chat-ai-comfyui
 ### Manual Setup
 
 1. Install Python dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Configure ComfyUI integration:
+1. Configure ComfyUI integration:
+
 ```bash
 python src/setup_comfyui.py
 ```
 
-3. Set up environment variables:
+1. Set up environment variables:
+
 ```bash
 cp config/example.env .env
 # Edit .env with your configuration
@@ -69,21 +76,25 @@ cp config/example.env .env
 ## 🔧 Core Components
 
 ### Chat Interface Layer
+
 - Message reception and validation
 - Multi-platform chat system integration
 - Response formatting and delivery
 
 ### Intent Processing Engine
+
 - Natural language understanding (NLU)
 - Command classification and entity recognition
 - Parameter extraction and validation
 
 ### ComfyUI Control Layer
+
 - API client for ComfyUI operations
 - Workflow management and execution
 - Node manipulation and configuration
 
 ### NSFW Safety System
+
 - ComfyUI-Nudenet integration
 - Content filtering and censoring
 - Customizable safety thresholds
@@ -91,19 +102,22 @@ cp config/example.env .env
 ## 🚦 Usage Examples
 
 ### Basic Image Generation
-```
+
+```text
 User: "Generate a red sports car with dramatic lighting"
 System: Creates ComfyUI workflow → Executes → Returns generated image
 ```
 
 ### NSFW Content Filtering
-```
+
+```text
 User: "Create an artistic portrait"
 System: Generates image → Applies NSFW filtering → Returns safe content
 ```
 
 ### Workflow Modification
-```
+
+```text
 User: "Make the previous image more vibrant and add a sunset background"
 System: Modifies existing workflow → Re-executes → Returns updated image
 ```
@@ -118,6 +132,7 @@ System: Modifies existing workflow → Re-executes → Returns updated image
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details on:
+
 - Code style and standards
 - Development workflow
 - Testing requirements
@@ -141,4 +156,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Note**: This project is designed to work with ComfyUI's API and requires a properly configured ComfyUI installation. Please refer to the [HOWTO guide](docs/HOWTO.md) for detailed setup instructions.
+**Note**: This project is designed to work with ComfyUI's API and requires a properly configured ComfyUI installation.
+Please refer to the [HOWTO guide](docs/HOWTO.md) for detailed setup instructions.

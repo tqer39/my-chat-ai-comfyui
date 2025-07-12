@@ -1,6 +1,7 @@
 # Contributing Guide
 
-Thank you for your interest in contributing to my-chat-ai-comfyui! This guide will help you get started with contributing to the project.
+Thank you for your interest in contributing to my-chat-ai-comfyui! This guide will help you get started with
+contributing to the project.
 
 ## Table of Contents
 
@@ -17,7 +18,8 @@ Thank you for your interest in contributing to my-chat-ai-comfyui! This guide wi
 
 ## Code of Conduct
 
-This project adheres to a code of conduct that we expect all contributors to follow. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md) to help us maintain a welcoming and inclusive community.
+This project adheres to a code of conduct that we expect all contributors to follow. Please read and follow our
+[Code of Conduct](CODE_OF_CONDUCT.md) to help us maintain a welcoming and inclusive community.
 
 ### Our Standards
 
@@ -242,7 +244,7 @@ Our pre-commit configuration automatically runs:
 
 ### Test Structure
 
-```
+```text
 tests/
 ├── unit/                 # Unit tests for individual components
 │   ├── test_intent_processor.py
@@ -319,6 +321,7 @@ class TestComfyUIIntegration:
 ### Test Coverage
 
 We aim for:
+
 - **Unit tests**: 90%+ coverage
 - **Integration tests**: Cover all major user flows
 - **Performance tests**: For critical paths
@@ -473,6 +476,7 @@ For feature requests, include:
 ### Issue Templates
 
 We provide templates for:
+
 - Bug reports
 - Feature requests
 - Documentation improvements
@@ -498,6 +502,7 @@ If you need help:
 ### Recognition
 
 Contributors are recognized in:
+
 - CONTRIBUTORS.md file
 - Release notes for significant contributions
 - GitHub contributor graphs
@@ -519,6 +524,7 @@ Contributors are recognized in:
 ### Release Process
 
 We follow semantic versioning (SemVer):
+
 - **Major** (X.0.0): Breaking changes
 - **Minor** (0.X.0): New features, backwards compatible
 - **Patch** (0.0.X): Bug fixes, backwards compatible
@@ -526,6 +532,7 @@ We follow semantic versioning (SemVer):
 ### Maintenance
 
 The project is actively maintained by:
+
 - Core maintainers who review PRs and manage releases
 - Community contributors who help with features and bug fixes
 - Documentation maintainers who keep docs up-to-date

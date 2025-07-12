@@ -19,7 +19,7 @@ My Chat AI ComfyUI APIは、会話型AIインターフェースとComfyUIの視�
 
 ### ベースURL
 
-```
+```text
 https://api.my-chat-ai-comfyui.com/v1
 ```
 
@@ -55,6 +55,7 @@ Authorization: Bearer YOUR_API_KEY
 自然言語メッセージを処理し、ComfyUIワークフローを生成・実行します。
 
 **リクエスト**:
+
 ```json
 {
   "message": "美しい風景画像を生成してください",
@@ -69,6 +70,7 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -85,12 +87,14 @@ Authorization: Bearer YOUR_API_KEY
 チャット履歴を取得します。
 
 **パラメータ**:
+
 - `user_id` (必須): ユーザーID
 - `session_id` (オプション): セッションID
 - `limit` (オプション): 取得する履歴の数（デフォルト: 50）
 - `offset` (オプション): オフセット（デフォルト: 0）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -115,6 +119,7 @@ Authorization: Bearer YOUR_API_KEY
 生成ステータスを確認します。
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -141,6 +146,7 @@ Authorization: Bearer YOUR_API_KEY
 生成をキャンセルします。
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -154,6 +160,7 @@ Authorization: Bearer YOUR_API_KEY
 現在のキューの状態を取得します。
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -173,10 +180,12 @@ Authorization: Bearer YOUR_API_KEY
 利用可能なモデルのリストを取得します。
 
 **パラメータ**:
+
 - `type` (オプション): モデルタイプ（checkpoint, lora, vae, etc.）
 - `category` (オプション): カテゴリ（realistic, anime, artistic, etc.）
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -199,6 +208,7 @@ Authorization: Bearer YOUR_API_KEY
 特定のモデルの詳細情報を取得します。
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -228,6 +238,7 @@ Authorization: Bearer YOUR_API_KEY
 画像のNSFWコンテンツを分析します。
 
 **リクエスト**:
+
 ```json
 {
   "image_url": "https://example.com/image.jpg",
@@ -236,6 +247,7 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -258,6 +270,7 @@ Authorization: Bearer YOUR_API_KEY
 画像にNSFWフィルターを適用します。
 
 **リクエスト**:
+
 ```json
 {
   "image_url": "https://example.com/image.jpg",
@@ -267,6 +280,7 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -283,6 +297,7 @@ Authorization: Bearer YOUR_API_KEY
 利用可能なワークフローテンプレートを取得します。
 
 **レスポンス**:
+
 ```json
 {
   "success": true,
@@ -310,6 +325,7 @@ Authorization: Bearer YOUR_API_KEY
 カスタムワークフローを実行します。
 
 **リクエスト**:
+
 ```json
 {
   "workflow": {
@@ -334,7 +350,7 @@ Authorization: Bearer YOUR_API_KEY
 const ws = new WebSocket('wss://api.my-chat-ai-comfyui.com/v1/ws');
 ```
 
-### 認証
+### WebSocket認証
 
 接続後、最初にAPIキーで認証を行います：
 
@@ -455,13 +471,13 @@ def generate_image(prompt):
             "style": "realistic"
         }
     }
-    
+
     response = requests.post(
         f"{API_BASE}/api/chat/process",
         headers=headers,
         json=data
     )
-    
+
     return response.json()
 
 # 使用例
@@ -531,7 +547,7 @@ class ChatAIWebSocketClient {
 
     connect() {
         this.ws = new WebSocket('wss://api.my-chat-ai-comfyui.com/v1/ws');
-        
+
         this.ws.onopen = () => {
             // 認証
             this.ws.send(JSON.stringify({

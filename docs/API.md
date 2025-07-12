@@ -15,7 +15,8 @@ This document provides comprehensive API documentation for the my-chat-ai-comfyu
 
 ## Overview
 
-The my-chat-ai-comfyui system provides both REST and WebSocket APIs for integrating chat AI capabilities with ComfyUI workflows. The API allows you to:
+The my-chat-ai-comfyui system provides both REST and WebSocket APIs for integrating chat AI capabilities with ComfyUI
+workflows. The API allows you to:
 
 - Process natural language commands
 - Generate images through ComfyUI workflows
@@ -25,7 +26,7 @@ The my-chat-ai-comfyui system provides both REST and WebSocket APIs for integrat
 
 ### Base URL
 
-```
+```text
 http://localhost:8080/api/v1
 ```
 
@@ -56,6 +57,7 @@ For web interface integration, session-based authentication is also supported.
 Process a natural language message and execute corresponding ComfyUI operations.
 
 **Request Body:**
+
 ```json
 {
   "message": "Generate a red sports car with dramatic lighting",
@@ -70,6 +72,7 @@ Process a natural language message and execute corresponding ComfyUI operations.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -94,6 +97,7 @@ Process a natural language message and execute corresponding ComfyUI operations.
 Get the status of a specific generation request.
 
 **Response:**
+
 ```json
 {
   "prompt_id": "abc123",
@@ -115,6 +119,7 @@ Get the status of a specific generation request.
 Get the current generation queue status.
 
 **Response:**
+
 ```json
 {
   "queue_running": [
@@ -141,6 +146,7 @@ Get the current generation queue status.
 List available ComfyUI models.
 
 **Response:**
+
 ```json
 {
   "checkpoints": [
@@ -163,6 +169,7 @@ List available ComfyUI models.
 Analyze an image for NSFW content.
 
 **Request Body:**
+
 ```json
 {
   "image_url": "/outputs/image.png",
@@ -171,6 +178,7 @@ Analyze an image for NSFW content.
 ```
 
 **Response:**
+
 ```json
 {
   "is_nsfw": false,
@@ -185,6 +193,7 @@ Analyze an image for NSFW content.
 Apply NSFW filtering to an image.
 
 **Request Body:**
+
 ```json
 {
   "image_url": "/outputs/image.png",
@@ -194,6 +203,7 @@ Apply NSFW filtering to an image.
 ```
 
 **Response:**
+
 ```json
 {
   "filtered_image_url": "/outputs/filtered_image.png",
@@ -208,7 +218,7 @@ Apply NSFW filtering to an image.
 
 Connect to the WebSocket endpoint for real-time updates:
 
-```
+```text
 ws://localhost:8080/ws
 ```
 
@@ -228,6 +238,7 @@ All WebSocket messages use JSON format:
 #### Client to Server
 
 **chat_message:**
+
 ```json
 {
   "type": "chat_message",
@@ -239,6 +250,7 @@ All WebSocket messages use JSON format:
 ```
 
 **subscribe_generation:**
+
 ```json
 {
   "type": "subscribe_generation",
@@ -251,6 +263,7 @@ All WebSocket messages use JSON format:
 #### Server to Client
 
 **generation_progress:**
+
 ```json
 {
   "type": "generation_progress",
@@ -264,6 +277,7 @@ All WebSocket messages use JSON format:
 ```
 
 **generation_complete:**
+
 ```json
 {
   "type": "generation_complete",
@@ -277,6 +291,7 @@ All WebSocket messages use JSON format:
 ```
 
 **chat_response:**
+
 ```json
 {
   "type": "chat_response",
@@ -342,6 +357,7 @@ Includes additional nodes for content filtering:
 Create a custom workflow template.
 
 **Request Body:**
+
 ```json
 {
   "name": "custom_portrait",

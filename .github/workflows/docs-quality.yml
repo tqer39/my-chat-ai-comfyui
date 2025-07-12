@@ -60,55 +60,55 @@ jobs:
       - name: Check Japanese documentation exists
         run: |
           echo "Checking for Japanese documentation files..."
-          
+
           # Check that Japanese versions exist for main documentation files
           if [ ! -f "docs/HOWTO.ja.md" ]; then
             echo "Error: docs/HOWTO.ja.md is missing"
             exit 1
           fi
-          
+
           if [ ! -f "docs/API.ja.md" ]; then
             echo "Error: docs/API.ja.md is missing"
             exit 1
           fi
-          
+
           if [ ! -f "docs/CONTRIBUTING.ja.md" ]; then
             echo "Error: docs/CONTRIBUTING.ja.md is missing"
             exit 1
           fi
-          
+
           if [ ! -f "docs/README.ja.md" ]; then
             echo "Error: docs/README.ja.md is missing"
             exit 1
           fi
-          
+
           echo "All required Japanese documentation files are present"
 
       - name: Check English documentation structure
         run: |
           echo "Checking English documentation structure..."
-          
+
           # Check that English versions exist in correct locations
           if [ ! -f "README.md" ]; then
             echo "Error: README.md is missing from root"
             exit 1
           fi
-          
+
           if [ ! -f "docs/HOWTO.md" ]; then
             echo "Error: docs/HOWTO.md is missing"
             exit 1
           fi
-          
+
           if [ ! -f "docs/API.md" ]; then
             echo "Error: docs/API.md is missing"
             exit 1
           fi
-          
+
           if [ ! -f "docs/CONTRIBUTING.md" ]; then
             echo "Error: docs/CONTRIBUTING.md is missing"
             exit 1
           fi
-          
+
           echo "All required English documentation files are present"
 
   quality-tools-check:
@@ -120,49 +120,49 @@ jobs:
       - name: Check configuration files exist
         run: |
           echo "Checking for required configuration files..."
-          
+
           if [ ! -f ".editorconfig" ]; then
             echo "Error: .editorconfig is missing"
             exit 1
           fi
-          
+
           if [ ! -f ".pre-commit-config.yaml" ]; then
             echo "Error: .pre-commit-config.yaml is missing"
             exit 1
           fi
-          
+
           if [ ! -f ".markdownlint.json" ]; then
             echo "Error: .markdownlint.json is missing"
             exit 1
           fi
-          
+
           if [ ! -f "cspell.json" ]; then
             echo "Error: cspell.json is missing"
             exit 1
           fi
-          
+
           echo "All required configuration files are present"
 
       - name: Validate configuration files
         run: |
           echo "Validating configuration files..."
-          
+
           # Validate JSON files
           python -m json.tool .markdownlint.json > /dev/null
           echo ".markdownlint.json is valid JSON"
-          
+
           python -m json.tool cspell.json > /dev/null
           echo "cspell.json is valid JSON"
-          
+
           # Check that pre-commit config includes required hooks
           if ! grep -q "markdownlint-cli2" .pre-commit-config.yaml; then
             echo "Error: markdownlint-cli2 hook not found in .pre-commit-config.yaml"
             exit 1
           fi
-          
+
           if ! grep -q "cspell" .pre-commit-config.yaml; then
             echo "Error: cspell hook not found in .pre-commit-config.yaml"
             exit 1
           fi
-          
+
           echo "Configuration files are valid"
